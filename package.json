@@ -1,0 +1,81 @@
+{
+  "name": "ofe-ui",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A Vue 3 component library with TypeScript support",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "pnpm --filter @ofe/play dev",
+    "build": "pnpm --filter @ofe/ui build",
+    "build:types": "vue-tsc --declaration --emitDeclarationOnly",
+    "preview": "pnpm --filter @ofe/play preview",
+    "commit": "git-cz",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "lint:check": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --ignore-path .gitignore",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "type-check": "vue-tsc --noEmit -p tsconfig.json",
+    "prepare": "husky install"
+  },
+  "keywords": [
+    "vue3",
+    "typescript",
+    "vite",
+    "component-library",
+    "ui"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@commitlint/cli": "^20.2.0",
+    "@commitlint/config-conventional": "^20.2.0",
+    "@types/node": "^20.10.5",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "@vitejs/plugin-vue": "^4.5.2",
+    "@vue/eslint-config-typescript": "^12.0.0",
+    "commitizen": "^4.3.1",
+    "cz-git": "^1.12.0",
+    "eslint": "^8.56.0",
+    "eslint-plugin-vue": "^9.19.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "pnpm": "^8.15.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.10",
+    "vite-plugin-dts": "^3.7.0",
+    "vue": "^3.3.13",
+    "vue-tsc": "^1.8.25"
+  },
+  "peerDependencies": {
+    "vue": "^3.3.0"
+  },
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=8"
+  },
+  "packageManager": "pnpm@8.15.0",
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-git"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{vue}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml,yaml}": [
+      "prettier --write"
+    ]
+  }
+}
