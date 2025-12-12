@@ -6,16 +6,45 @@ import { defineConfig } from 'eslint-define-config'
 
 export default defineConfig([
   {
-    files: ['**/*.{js,mjs,cjs,ts,vue}'],
+    files: ['**/*.{js,mjs,cjs,ts}'],
     languageOptions: {
-      parser: pluginTypeScript,
+      parser: parserTypeScript,
       parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
-        ecmaFeatures: {
-          jsx: true,
-        },
-        extraFileExtensions: ['.vue'],
+      },
+      globals: {
+        console: 'readonly',
+        process: 'readonly',
+        URL: 'readonly',
+        __dirname: 'readonly',
+        __filename: 'readonly',
+        alert: 'readonly',
+        document: 'readonly',
+        window: 'readonly',
+        navigator: 'readonly',
+      },
+    },
+    plugins: {
+      '@typescript-eslint': pluginTypeScript,
+    },
+    rules: {
+      ...js.configs.recommended.rules,
+      '@typescript-eslint/no-unused-vars': 'error',
+    },
+  },
+  {
+    files: ['**/*.vue'],
+    languageOptions: {
+      parser: pluginVue.parser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        parser: parserTypeScript,
+      },
+      globals: {
+        console: 'readonly',
+        process: 'readonly',
       },
     },
     plugins: {
@@ -24,21 +53,10 @@ export default defineConfig([
     },
     processor: pluginVue.processors['.vue'],
     rules: {
-      ...js.configs.recommended.rules,
-      ...pluginTypeScript.configs.recommended.rules,
-      ...pluginVue.configs.base.rules,
       ...pluginVue.configs['vue3-recommended'].rules,
       '@typescript-eslint/no-unused-vars': 'error',
       'vue/multi-word-component-names': 'off',
       'vue/no-v-html': 'off',
-    },
-    settings: {
-      'import/resolver': {
-        typescript: {
-          alwaysTryTypes: true,
-          project: './tsconfig.json',
-        },
-      },
     },
   },
 ])
